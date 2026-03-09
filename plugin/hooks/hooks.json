@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Look at the conversation. Was the assistant actively working on mcp-kanban tickets (referenced ticket IDs, used move_ticket, create_ticket, complete_subtask, or discussed specific kanban tasks)? If YES and it did NOT move completed tickets to Done or update their descriptions with what was implemented, respond with {\"ok\": false, \"reason\": \"You were working on kanban tickets but didn't update their status. Move completed tickets/subtasks to Done and update descriptions with what was done.\"}. If the assistant was NOT doing kanban work, or already updated the tickets properly, respond with {\"ok\": true}."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,515 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.714);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+  --radius: 0.625rem;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.369 0 0);
+  --input: oklch(0.369 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.369 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+/* ============================================================
+   Brutalist Theme — Light (Colorful)
+   ============================================================ */
+.theme-brutalist {
+  --background: oklch(0.97 0.01 85);
+  --foreground: oklch(0.1 0 0);
+  --card: oklch(0.99 0.005 85);
+  --card-foreground: oklch(0.1 0 0);
+  --popover: oklch(0.99 0.005 85);
+  --popover-foreground: oklch(0.1 0 0);
+  --primary: oklch(0.63 0.26 25);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.92 0.04 95);
+  --secondary-foreground: oklch(0.1 0 0);
+  --muted: oklch(0.94 0.02 90);
+  --muted-foreground: oklch(0.35 0 0);
+  --accent: oklch(0.85 0.18 85);
+  --accent-foreground: oklch(0.1 0 0);
+  --destructive: oklch(0.55 0.25 27);
+  --destructive-foreground: oklch(0.55 0.25 27);
+  --border: oklch(0.1 0 0);
+  --input: oklch(0.1 0 0);
+  --ring: oklch(0.63 0.26 25);
+  --radius: 0;
+  --brutalist-shadow: 4px 4px 0 oklch(0.1 0 0);
+  --brutalist-shadow-hover: 6px 6px 0 oklch(0.1 0 0);
+  --brutalist-border-width: 2px;
+  --font-sans: ui-monospace, 'SFMono-Regular', Menlo, Monaco, 'Cascadia Code', monospace;
+}
+
+/* Brutalist — Dark (Same warm family as light: red-orange + yellow) */
+.theme-brutalist.dark {
+  --background: oklch(0.17 0.02 60);
+  --foreground: oklch(0.95 0.01 85);
+  --card: oklch(0.21 0.02 60);
+  --card-foreground: oklch(0.95 0.01 85);
+  --popover: oklch(0.21 0.02 60);
+  --popover-foreground: oklch(0.95 0.01 85);
+  --primary: oklch(0.7 0.22 25);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.25 0.02 60);
+  --secondary-foreground: oklch(0.95 0.01 85);
+  --muted: oklch(0.25 0.02 60);
+  --muted-foreground: oklch(0.6 0.02 85);
+  --accent: oklch(0.8 0.15 85);
+  --accent-foreground: oklch(0.1 0 0);
+  --destructive: oklch(0.6 0.25 27);
+  --destructive-foreground: oklch(0.6 0.25 27);
+  --border: oklch(0.95 0.01 85);
+  --input: oklch(0.4 0.02 60);
+  --ring: oklch(0.7 0.22 25);
+  --brutalist-shadow: 4px 4px 0 oklch(0.7 0.22 25);
+  --brutalist-shadow-hover: 6px 6px 0 oklch(0.8 0.15 85);
+}
+
+/* ============================================================
+   Glass Theme — Light
+   ============================================================ */
+.theme-glass {
+  --background: oklch(0.97 0.005 250);
+  --foreground: oklch(0.15 0.01 260);
+  --card: oklch(0.99 0.003 250 / 0.6);
+  --card-foreground: oklch(0.15 0.01 260);
+  --popover: oklch(0.99 0.003 250 / 0.85);
+  --popover-foreground: oklch(0.15 0.01 260);
+  --primary: oklch(0.55 0.15 260);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.94 0.005 250 / 0.5);
+  --secondary-foreground: oklch(0.2 0.01 260);
+  --muted: oklch(0.94 0.005 250 / 0.5);
+  --muted-foreground: oklch(0.45 0.01 260);
+  --accent: oklch(0.94 0.005 250 / 0.5);
+  --accent-foreground: oklch(0.2 0.01 260);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.3 0.01 260 / 0.12);
+  --input: oklch(0.3 0.01 260 / 0.12);
+  --ring: oklch(0.55 0.15 260 / 0.4);
+  --radius: 1rem;
+  --glass-blur: 16px;
+  --glass-bg: oklch(0.99 0.003 250 / 0.55);
+  --glass-border: oklch(0.3 0.01 260 / 0.1);
+}
+
+/* Glass — Dark */
+.theme-glass.dark {
+  --background: oklch(0.18 0.04 280);
+  --foreground: oklch(0.93 0.01 270);
+  --card: oklch(0.22 0.04 280 / 0.5);
+  --card-foreground: oklch(0.93 0.01 270);
+  --popover: oklch(0.22 0.04 280 / 0.8);
+  --popover-foreground: oklch(0.93 0.01 270);
+  --primary: oklch(0.7 0.15 270);
+  --primary-foreground: oklch(0.1 0 0);
+  --secondary: oklch(0.28 0.035 280 / 0.5);
+  --secondary-foreground: oklch(0.93 0.01 270);
+  --muted: oklch(0.25 0.035 280 / 0.5);
+  --muted-foreground: oklch(0.65 0.02 275);
+  --accent: oklch(0.28 0.035 280 / 0.5);
+  --accent-foreground: oklch(0.93 0.01 270);
+  --destructive: oklch(0.6 0.25 27);
+  --destructive-foreground: oklch(0.6 0.25 27);
+  --border: oklch(0.8 0.03 275 / 0.12);
+  --input: oklch(0.8 0.03 275 / 0.12);
+  --ring: oklch(0.7 0.15 270 / 0.4);
+  --glass-blur: 20px;
+  --glass-bg: oklch(0.22 0.04 280 / 0.5);
+  --glass-border: oklch(0.8 0.03 275 / 0.1);
+}
+
+/* ============================================================
+   Softnight Theme — Dark purple IDE palette
+   Inspired by Catppuccin Mocha / VS Code dark purple themes
+   #1e1e2e bg, #cdd6f4 fg, #cba6f7 mauve, #a6e3a1 green,
+   #f38ba8 pink, #fab387 peach, #89b4fa blue, #f9e2af yellow
+   ============================================================ */
+.theme-softnight {
+  --background: oklch(0.2 0.04 280);
+  --foreground: oklch(0.9 0.02 270);
+  --card: oklch(0.25 0.04 280);
+  --card-foreground: oklch(0.9 0.02 270);
+  --popover: oklch(0.25 0.04 280);
+  --popover-foreground: oklch(0.9 0.02 270);
+  --primary: oklch(0.72 0.15 310);
+  --primary-foreground: oklch(0.15 0.03 280);
+  --secondary: oklch(0.3 0.04 280);
+  --secondary-foreground: oklch(0.9 0.02 270);
+  --muted: oklch(0.3 0.04 280);
+  --muted-foreground: oklch(0.6 0.03 280);
+  --accent: oklch(0.75 0.12 170);
+  --accent-foreground: oklch(0.15 0.03 280);
+  --destructive: oklch(0.65 0.2 15);
+  --destructive-foreground: oklch(0.65 0.2 15);
+  --border: oklch(0.35 0.04 280);
+  --input: oklch(0.35 0.04 280);
+  --ring: oklch(0.72 0.15 310 / 0.5);
+  --radius: 0.5rem;
+}
+
+/* Softnight — Dark (same as base, inherently dark) */
+.theme-softnight.dark {
+  --background: oklch(0.2 0.04 280);
+  --foreground: oklch(0.9 0.02 270);
+  --card: oklch(0.25 0.04 280);
+  --card-foreground: oklch(0.9 0.02 270);
+  --popover: oklch(0.25 0.04 280);
+  --popover-foreground: oklch(0.9 0.02 270);
+  --primary: oklch(0.72 0.15 310);
+  --primary-foreground: oklch(0.15 0.03 280);
+  --secondary: oklch(0.3 0.04 280);
+  --secondary-foreground: oklch(0.9 0.02 270);
+  --muted: oklch(0.3 0.04 280);
+  --muted-foreground: oklch(0.6 0.03 280);
+  --accent: oklch(0.75 0.12 170);
+  --accent-foreground: oklch(0.15 0.03 280);
+  --destructive: oklch(0.65 0.2 15);
+  --destructive-foreground: oklch(0.65 0.2 15);
+  --border: oklch(0.35 0.04 280);
+  --input: oklch(0.35 0.04 280);
+  --ring: oklch(0.72 0.15 310 / 0.5);
+}
+
+/* Softnight — Light (pastel purple light variant) */
+.theme-softnight:not(.dark) {
+  --background: oklch(0.96 0.015 280);
+  --foreground: oklch(0.2 0.04 280);
+  --card: oklch(0.98 0.01 280);
+  --card-foreground: oklch(0.2 0.04 280);
+  --popover: oklch(0.98 0.01 280);
+  --popover-foreground: oklch(0.2 0.04 280);
+  --primary: oklch(0.55 0.18 310);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.92 0.02 280);
+  --secondary-foreground: oklch(0.2 0.04 280);
+  --muted: oklch(0.92 0.02 280);
+  --muted-foreground: oklch(0.5 0.04 280);
+  --accent: oklch(0.55 0.15 170);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.5 0.2 15);
+  --destructive-foreground: oklch(0.5 0.2 15);
+  --border: oklch(0.88 0.02 280);
+  --input: oklch(0.88 0.02 280);
+  --ring: oklch(0.55 0.18 310 / 0.5);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-sans: 'Geist Variable', sans-serif;
+  --radius: 0.625rem;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@keyframes animate-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-in {
+  animation: animate-in 0.12s ease-out;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* ============================================================
+   Brutalist — Structural Overrides
+   ============================================================ */
+.theme-brutalist [data-slot="card"] {
+  border-width: var(--brutalist-border-width);
+  border-radius: 0;
+  box-shadow: var(--brutalist-shadow);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.theme-brutalist [data-slot="card"]:hover {
+  box-shadow: var(--brutalist-shadow-hover);
+}
+
+.theme-brutalist [data-slot="button"] {
+  border-radius: 0;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-width: var(--brutalist-border-width);
+}
+
+.theme-brutalist [data-slot="badge"] {
+  border-radius: 0;
+  border-width: var(--brutalist-border-width);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.theme-brutalist [data-slot="input"],
+.theme-brutalist [data-slot="textarea"] {
+  border-radius: 0;
+  border-width: var(--brutalist-border-width);
+}
+
+.theme-brutalist [data-slot="dialog-content"],
+.theme-brutalist [data-slot="sheet-content"],
+.theme-brutalist [data-slot="alert-dialog-content"] {
+  border-radius: 0;
+  border-width: var(--brutalist-border-width);
+  box-shadow: var(--brutalist-shadow-hover);
+}
+
+.theme-brutalist [data-slot="tabs-trigger"] {
+  border-radius: 0;
+}
+
+.theme-brutalist [data-slot="tabs-list"] {
+  border-radius: 0;
+}
+
+.theme-brutalist [data-slot="separator"] {
+  height: var(--brutalist-border-width);
+}
+
+.theme-brutalist [data-slot="popover-content"],
+.theme-brutalist [data-slot="dropdown-menu-content"],
+.theme-brutalist [data-slot="select-content"] {
+  border-radius: 0;
+  border-width: var(--brutalist-border-width);
+  box-shadow: var(--brutalist-shadow);
+}
+
+/* ============================================================
+   Glass — Structural Overrides
+   ============================================================ */
+.theme-glass [data-slot="card"] {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 1px 3px oklch(0 0 0 / 0.04), 0 4px 12px oklch(0 0 0 / 0.03);
+}
+
+.theme-glass [data-slot="dialog-content"],
+.theme-glass [data-slot="alert-dialog-content"] {
+  background: var(--glass-bg);
+  backdrop-filter: blur(calc(var(--glass-blur) * 1.5));
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 1.5));
+  border: 1px solid var(--glass-border);
+}
+
+.theme-glass [data-slot="sheet-content"] {
+  background: var(--background);
+  backdrop-filter: blur(calc(var(--glass-blur) * 2));
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 2));
+  border: 1px solid var(--glass-border);
+}
+
+.theme-glass [data-slot="popover-content"],
+.theme-glass [data-slot="dropdown-menu-content"],
+.theme-glass [data-slot="select-content"] {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+
+.theme-glass [data-slot="button"] {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.theme-glass [data-slot="tabs-list"] {
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.theme-glass [data-slot="input"],
+.theme-glass [data-slot="textarea"] {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+}
+
+/* ============================================================
+   Header — Theme-Specific Overrides
+   ============================================================ */
+.theme-brutalist [data-slot="header"],
+.theme-brutalist [data-slot="header"] * {
+  --foreground: oklch(0.95 0 0);
+  --muted-foreground: oklch(0.75 0 0);
+  --muted: oklch(0.25 0 0);
+  --accent: oklch(0.25 0 0);
+  --accent-foreground: oklch(0.95 0 0);
+  --border: oklch(0.35 0 0);
+  --color-foreground: oklch(0.95 0 0);
+  --color-muted-foreground: oklch(0.75 0 0);
+  --color-muted: oklch(0.25 0 0);
+  --color-accent: oklch(0.25 0 0);
+  --color-accent-foreground: oklch(0.95 0 0);
+  --color-border: oklch(0.35 0 0);
+}
+
+.theme-brutalist [data-slot="header"] {
+  border-bottom: 3px solid var(--primary);
+  background: oklch(0.12 0 0);
+  color: oklch(0.95 0 0);
+  backdrop-filter: none;
+}
+
+.theme-brutalist.dark [data-slot="header"],
+.theme-brutalist.dark [data-slot="header"] * {
+  --muted: oklch(0.22 0.02 60);
+  --accent: oklch(0.22 0.02 60);
+  --color-muted: oklch(0.22 0.02 60);
+  --color-accent: oklch(0.22 0.02 60);
+}
+
+.theme-brutalist.dark [data-slot="header"] {
+  background: oklch(0.12 0.02 60);
+}
+
+.theme-glass [data-slot="header"] {
+  background: var(--glass-bg);
+  backdrop-filter: blur(calc(var(--glass-blur) * 1.5));
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 1.5));
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.theme-softnight.dark [data-slot="header"] {
+  background: oklch(0.16 0.04 280);
+  border-bottom: 1px solid oklch(0.72 0.15 310 / 0.3);
+}
+
+.theme-softnight:not(.dark) [data-slot="header"] {
+  background: oklch(0.96 0.015 280);
+  border-bottom: 1px solid oklch(0.55 0.18 310 / 0.3);
+}
+
+/* ============================================================
+   Softnight — Structural Overrides
+   ============================================================ */
+.theme-softnight [data-slot="card"] {
+  border-left: 3px solid var(--primary);
+}
+
+.theme-softnight [data-slot="badge"] {
+  font-weight: 600;
+}

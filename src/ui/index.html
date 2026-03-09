@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MCP Kanban</title>
+    <script>
+      (function() {
+        var raw = localStorage.getItem('mcp-kanban-theme') || 'default:system';
+        var parts = raw.split(':');
+        var visual = parts.length === 2 ? parts[0] : 'default';
+        var mode = parts.length === 2 ? parts[1] : raw;
+        if (mode === 'dark' || (mode !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+        if (visual === 'brutalist') document.documentElement.classList.add('theme-brutalist');
+        if (visual === 'glass') document.documentElement.classList.add('theme-glass');
+        if (visual === 'softnight') document.documentElement.classList.add('theme-softnight');
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./main.tsx"></script>
+  </body>
+</html>

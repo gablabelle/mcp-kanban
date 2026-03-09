@@ -1,0 +1,12 @@
+{
+  "name": "kanban",
+  "description": "AI-powered Kanban board for Claude Code. Automatically plans work into stories and subtasks, tracks progress as Claude codes, and keeps the board updated in real-time.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Gabriel Labelle"
+  },
+  "homepage": "https://github.com/gablabelle/mcp-kanban",
+  "repository": "https://github.com/gablabelle/mcp-kanban",
+  "license": "MIT",
+  "keywords": ["kanban", "project-management", "mcp", "task-tracking", "planning"]
+}

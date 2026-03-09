@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "mcp-kanban": {
+      "command": "npx",
+      "args": ["-y", "mcp-kanban", "mcp-server"]
+    }
+  }
+}

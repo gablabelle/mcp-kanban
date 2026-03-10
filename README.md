@@ -53,14 +53,13 @@ npx mcp-kanban provider add claude-code
 From your project root:
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/gablabelle/mcp-kanban/main/scripts/claude-install-plugin.sh)
+bash <(curl -s https://raw.githubusercontent.com/gablabelle/mcp-kanban/main/scripts/claude-install-remote.sh)
 ```
 
-Or clone the repo and run the script directly:
+Or from a local clone:
 
 ```bash
-git clone https://github.com/gablabelle/mcp-kanban.git /tmp/mcp-kanban
-bash /tmp/mcp-kanban/scripts/claude-install-plugin.sh
+bash /path/to/mcp-kanban/scripts/claude-install-plugin.sh
 ```
 
 This copies skills to `.claude/skills/` and adds the Stop hook to `.claude/settings.json`.
@@ -172,6 +171,7 @@ Works through planned tickets in priority order. For each subtask: moves it to I
 | Command | Description |
 |---------|-------------|
 | `mcp-kanban start` (default) | Start the server and open the web UI |
+| `mcp-kanban dev` | Start the API server and Vite dev server with hot reload |
 | `mcp-kanban mcp-server` | Start MCP server in stdio mode (for agent integration) |
 | `mcp-kanban provider list` | List available providers and their status |
 | `mcp-kanban provider add <name>` | Install a provider integration |
@@ -182,7 +182,7 @@ Works through planned tickets in priority order. For each subtask: moves it to I
 
 | Flag | Command | Description |
 |------|---------|-------------|
-| `-p, --port <port>` | `start` | Port to run the server on (default: 3010) |
+| `-p, --port <port>` | `start`, `dev` | Port to run the API server on (default: 3010) |
 | `--no-open` | `start` | Don't open the browser automatically |
 | `-y, --yes` | `reset` | Skip confirmation prompt |
 

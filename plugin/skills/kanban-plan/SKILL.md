@@ -1,27 +1,29 @@
 ---
-name: plan
+name: kanban-plan
 description: Break work into stories and subtasks on the Kanban board. Use when the user describes a feature, task, or body of work that should be planned, decomposed, or organized into trackable tickets.
 argument-hint: [description of work to plan]
-allowed-tools: Bash, Read, Grep, Glob, mcp__mcp-kanban__list_columns, mcp__mcp-kanban__list_tickets, mcp__mcp-kanban__create_ticket, mcp__mcp-kanban__create_subtask, mcp__mcp-kanban__move_ticket
+allowed-tools: Bash, Read, Grep, Glob, mcp__kanban__open_board, mcp__kanban__list_columns, mcp__kanban__list_tickets, mcp__kanban__create_ticket, mcp__kanban__create_subtask, mcp__kanban__move_ticket
 ---
 
 # Plan Work on the Kanban Board
 
 You are planning work by breaking it into stories and subtasks on the mcp-kanban board.
 
-## Step 1: Open the board immediately
+## Step 1: Start the board (MANDATORY FIRST STEP)
 
-Open the Kanban board in the browser so the user can watch tickets appear in real-time:
+**You MUST call `mcp__kanban__open_board` FIRST, before any other kanban tool.** This starts the web UI server. Wait for it to return, then open the URL in the browser:
 
 ```bash
-open "http://localhost:$(cat ~/.mcp-kanban/config.json 2>/dev/null | jq -r '.port // 3010')"
+open "<url from open_board>"
 ```
+
+Do NOT call `list_columns`, `list_tickets`, `create_ticket`, or any other kanban tool until this step is complete.
 
 ## Step 2: Discover the board structure
 
-Use `mcp__mcp-kanban__list_columns` to get the available columns and their IDs. Identify which column is best for new planned work (typically "Backlog" or "Todo").
+Use `mcp__kanban__list_columns` to get the available columns and their IDs. Identify which column is best for new planned work (typically "Backlog" or "Todo").
 
-Use `mcp__mcp-kanban__list_tickets` to check for existing tickets so you don't create duplicates.
+Use `mcp__kanban__list_tickets` to check for existing tickets so you don't create duplicates.
 
 ## Step 3: Analyze the work
 
@@ -33,8 +35,8 @@ Read relevant code files to understand the current state. Break the work describ
 ## Step 4: Create tickets on the board
 
 For each story:
-1. Create a story ticket with `mcp__mcp-kanban__create_ticket` — use a clear title and a description that explains the goal, acceptance criteria, and any relevant technical context
-2. Create subtasks under it with `mcp__mcp-kanban__create_subtask` — each subtask should have a concise title and a description covering what specifically needs to be done
+1. Create a story ticket with `mcp__kanban__create_ticket` — use a clear title and a description that explains the goal, acceptance criteria, and any relevant technical context
+2. Create subtasks under it with `mcp__kanban__create_subtask` — each subtask should have a concise title and a description covering what specifically needs to be done
 
 Place stories in the "Backlog" or "Todo" column (whichever makes more sense given the board's column structure).
 
@@ -49,7 +51,7 @@ After all tickets are created, present a summary:
 
 Then ask the user: **"The plan is on the board. Would you like me to start working through these tickets?"**
 
-If the user confirms, invoke the kanban-start workflow.
+If the user confirms, invoke the kanban-work workflow.
 
 ## Guidelines
 

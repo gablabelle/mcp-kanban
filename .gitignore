@@ -144,3 +144,6 @@ attachments/
 
 # Git worktrees
 .worktrees/
+
+# Local notes
+PUBLISH.md

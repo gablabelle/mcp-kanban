@@ -6,6 +6,8 @@ A local-first Kanban board for AI agents, powered by the Model Context Protocol 
 [![license](https://img.shields.io/npm/l/mcp-kanban)](./LICENSE)
 ![node](https://img.shields.io/badge/node-%3E%3D18-brightgreen)
 
+<video src="mcp-kanban.mov" autoplay loop muted playsinline></video>
+
 ## What is mcp-kanban?
 
 Most AI kanban tools try to be the orchestrator — spawning agents, managing worktrees, controlling execution. mcp-kanban doesn't. Your agent (Claude Code, Codex, Cursor) stays in control. mcp-kanban is just a board — agents report what they're doing through MCP tools, and you watch it happen in a real-time web UI. It fits into your existing workflow instead of replacing it.

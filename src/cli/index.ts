@@ -1,11 +1,16 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
+import fs from "fs";
+import path from "path";
+import os from "os";
 import { loadConfig, saveConfig, resetConfig } from "./config.js";
 import { startServer } from "../server/index.js";
 import { startMcpServer } from "../mcp/index.js";
 import { closeDb } from "../db/connection.js";
 import { listProviders, installProvider, uninstallProvider } from "../providers/index.js";
+
+const PID_PATH = path.join(os.homedir(), ".mcp-kanban", "server.pid");
 
 async function isServerRunning(port: number): Promise<boolean> {
   try {
@@ -51,6 +56,7 @@ program
 
     // Start API + WebSocket server (also runs migrations and seeds default project)
     startServer(port);
+    fs.writeFileSync(PID_PATH, String(process.pid));
     console.log("  ✓ Server running");
 
     // Mark first run as completed
@@ -71,6 +77,7 @@ program
     // Graceful shutdown
     const shutdown = () => {
       console.log("\n  Shutting down...");
+      try { fs.unlinkSync(PID_PATH); } catch {}
       closeDb();
       process.exit(0);
     };

@@ -1,9 +1,16 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { spawn } from "child_process";
+import fs from "fs";
+import path from "path";
+import os from "os";
 import { z } from "zod";
 import * as db from "../db/dal.js";
 import { notifyServer } from "./notify.js";
 import { detectGitContext } from "./git-context.js";
+import { loadConfig } from "../cli/config.js";
+
+const PID_PATH = path.join(os.homedir(), ".mcp-kanban", "server.pid");
 
 export function createMcpServer(defaultSessionId?: string) {
   const server = new McpServer(
@@ -227,6 +234,62 @@ export function createMcpServer(defaultSessionId?: string) {
       if (!deleted) return { content: [{ type: "text" as const, text: "Ticket not found" }], isError: true };
       await notifyServer("ticket:deleted", { id: ticket_id });
       return { content: [{ type: "text" as const, text: "Ticket deleted" }] };
+    },
+  );
+
+  // ---- open_board ----
+  server.tool(
+    "open_board",
+    "Start the Kanban web UI server if not already running and return its URL. Call this at the beginning of planning or when the user wants to see the board.",
+    {},
+    async () => {
+      const config = loadConfig();
+      const port = config.port ?? 3010;
+      const url = `http://localhost:${port}`;
+
+      let running = false;
+      try {
+        const res = await fetch(`${url}/api/health`, {
+          signal: AbortSignal.timeout(1000),
+        });
+        const data = await res.json() as { ok?: boolean };
+        running = data.ok === true;
+      } catch {
+        // Not running
+      }
+
+      if (!running) {
+        const binPath = new URL("../cli/index.js", import.meta.url).pathname;
+        const child = spawn(process.execPath, [binPath, "start", "--no-open"], {
+          detached: true,
+          stdio: "ignore",
+        });
+        child.unref();
+
+        // Save PID so we can stop it later
+        if (child.pid) {
+          fs.writeFileSync(PID_PATH, String(child.pid));
+        }
+      }
+
+      return { content: [{ type: "text" as const, text: JSON.stringify({ url, started: !running }) }] };
+    },
+  );
+
+  // ---- stop_board ----
+  server.tool(
+    "stop_board",
+    "Stop the Kanban web UI server.",
+    {},
+    async () => {
+      try {
+        const pid = parseInt(fs.readFileSync(PID_PATH, "utf-8").trim());
+        process.kill(pid, "SIGTERM");
+        fs.unlinkSync(PID_PATH);
+        return { content: [{ type: "text" as const, text: "Board server stopped." }] };
+      } catch {
+        return { content: [{ type: "text" as const, text: "Board server is not running." }] };
+      }
     },
   );
 

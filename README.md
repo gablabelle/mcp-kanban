@@ -17,23 +17,22 @@ Everything runs locally with SQLite, requires zero configuration, and launches w
 ## Quick Start (Claude Code)
 
 ```bash
-# 1. Start the board
-npx mcp-kanban
-
-# 2. In Claude Code, install the plugin
+# In Claude Code, install the plugin
 /plugin marketplace add gablabelle/claude-plugins
 /plugin install kanban@gablabelle-plugins
 ```
 
-Restart Claude Code, then try `/kanban:plan` to plan work.
+Restart Claude Code, then try `/kanban-plan` to plan work. The board starts automatically.
 
 **What's included:**
 
 | Component | What it does |
 |-----------|-------------|
 | MCP server | Connects Claude to the kanban board (create/move/update tickets) |
-| `/kanban:plan` | Breaks work into stories and subtasks, opens the board so you can watch |
-| `/kanban:start` | Works through planned tickets, moving them through columns as it goes |
+| `/kanban-plan` | Breaks work into stories and subtasks, opens the board so you can watch |
+| `/kanban-start` | Starts the web UI server and opens the board |
+| `/kanban-work` | Works through planned tickets, moving them through columns as it goes |
+| `/kanban-stop` | Stops the web UI server |
 | Stop hook | Reminds Claude to update ticket status when it forgets |
 
 Using Cursor, Codex, or another agent? See [Other Agents](#other-agents) below.
@@ -81,9 +80,11 @@ This adds mcp-kanban to `~/.cursor/mcp.json`.
 Cursor supports skills via `.cursor/skills/` or `.agents/skills/`. Copy the skill files manually:
 
 ```bash
-mkdir -p .cursor/skills/kanban-plan .cursor/skills/kanban-start
-curl -s https://raw.githubusercontent.com/gablabelle/mcp-kanban/main/plugin/skills/plan/SKILL.md -o .cursor/skills/kanban-plan/SKILL.md
-curl -s https://raw.githubusercontent.com/gablabelle/mcp-kanban/main/plugin/skills/start/SKILL.md -o .cursor/skills/kanban-start/SKILL.md
+mkdir -p .cursor/skills/kanban-plan .cursor/skills/kanban-start .cursor/skills/kanban-work .cursor/skills/kanban-stop
+curl -s https://raw.githubusercontent.com/gablabelle/mcp-kanban/main/plugin/skills/kanban-plan/SKILL.md -o .cursor/skills/kanban-plan/SKILL.md
+curl -s https://raw.githubusercontent.com/gablabelle/mcp-kanban/main/plugin/skills/kanban-start/SKILL.md -o .cursor/skills/kanban-start/SKILL.md
+curl -s https://raw.githubusercontent.com/gablabelle/mcp-kanban/main/plugin/skills/kanban-work/SKILL.md -o .cursor/skills/kanban-work/SKILL.md
+curl -s https://raw.githubusercontent.com/gablabelle/mcp-kanban/main/plugin/skills/kanban-stop/SKILL.md -o .cursor/skills/kanban-stop/SKILL.md
 ```
 
 **3. Install hooks (optional):**
@@ -126,9 +127,11 @@ codex mcp add mcp-kanban -- npx -y mcp-kanban mcp-server
 Codex supports skills via `.agents/skills/`:
 
 ```bash
-mkdir -p .agents/skills/kanban-plan .agents/skills/kanban-start
-curl -s https://raw.githubusercontent.com/gablabelle/mcp-kanban/main/plugin/skills/plan/SKILL.md -o .agents/skills/kanban-plan/SKILL.md
-curl -s https://raw.githubusercontent.com/gablabelle/mcp-kanban/main/plugin/skills/start/SKILL.md -o .agents/skills/kanban-start/SKILL.md
+mkdir -p .agents/skills/kanban-plan .agents/skills/kanban-start .agents/skills/kanban-work .agents/skills/kanban-stop
+curl -s https://raw.githubusercontent.com/gablabelle/mcp-kanban/main/plugin/skills/kanban-plan/SKILL.md -o .agents/skills/kanban-plan/SKILL.md
+curl -s https://raw.githubusercontent.com/gablabelle/mcp-kanban/main/plugin/skills/kanban-start/SKILL.md -o .agents/skills/kanban-start/SKILL.md
+curl -s https://raw.githubusercontent.com/gablabelle/mcp-kanban/main/plugin/skills/kanban-work/SKILL.md -o .agents/skills/kanban-work/SKILL.md
+curl -s https://raw.githubusercontent.com/gablabelle/mcp-kanban/main/plugin/skills/kanban-stop/SKILL.md -o .agents/skills/kanban-stop/SKILL.md
 ```
 
 > **Note:** Codex does not support hooks. The agent will still use the MCP tools, but won't get automatic reminders to update tickets.
@@ -152,20 +155,36 @@ For any agent that supports MCP, configure it to run mcp-kanban in stdio mode:
 
 Skills teach your agent how to use the board effectively. They work with Claude Code, Cursor, and Codex.
 
-### `/kanban:plan` (or `/kanban-plan` manual install)
+### `/kanban-plan`
 
-Tell your agent what you want to build, and it breaks the work into stories and subtasks on the board. Opens the browser immediately so you can watch tickets appear in real-time. After planning, it asks if you want to start working.
+Tell your agent what you want to build, and it breaks the work into stories and subtasks on the board. Starts the web UI and opens the browser so you can watch tickets appear in real-time. After planning, it asks if you want to start working.
 
 ```
-/kanban:plan Add dark mode support with theme persistence
+/kanban-plan Add dark mode support with theme persistence
 ```
 
-### `/kanban:start` (or `/kanban-start` manual install)
+### `/kanban-start`
+
+Starts the web UI server and opens the board in the browser.
+
+```
+/kanban-start
+```
+
+### `/kanban-work`
 
 Works through planned tickets in priority order. For each subtask: moves it to In Progress, does the work, updates the ticket description with what was done, and marks it complete. Asks before moving to the next story.
 
 ```
-/kanban:start
+/kanban-work
+```
+
+### `/kanban-stop`
+
+Stops the web UI server.
+
+```
+/kanban-stop
 ```
 
 ## CLI Reference
@@ -284,6 +303,20 @@ List all columns for a project.
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `project_id` | string | No | Project ID (uses default project if omitted) |
+
+### Board Management
+
+#### `open_board`
+
+Start the web UI server if not already running. Returns the board URL.
+
+No parameters.
+
+#### `stop_board`
+
+Stop the web UI server.
+
+No parameters.
 
 ### Session Management
 

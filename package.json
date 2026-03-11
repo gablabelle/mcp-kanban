@@ -1,6 +1,6 @@
 {
   "name": "mcp-kanban",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A local-first AI-native Kanban board for AI agents, powered by the Model Context Protocol",
   "repository": {
     "type": "git",

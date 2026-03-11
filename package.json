@@ -2,6 +2,14 @@
   "name": "mcp-kanban",
   "version": "0.1.0",
   "description": "A local-first AI-native Kanban board for AI agents, powered by the Model Context Protocol",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gablabelle/mcp-kanban.git"
+  },
+  "homepage": "https://github.com/gablabelle/mcp-kanban",
+  "bugs": {
+    "url": "https://github.com/gablabelle/mcp-kanban/issues"
+  },
   "type": "module",
   "bin": {
     "mcp-kanban": "./dist/cli/index.js"

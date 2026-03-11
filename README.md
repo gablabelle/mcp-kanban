@@ -390,7 +390,7 @@ TypeScript, Hono, React, Vite, Tailwind CSS, dnd-kit, Drizzle ORM, better-sqlite
 
 ## Themes
 
-Four built-in themes, each with light and dark mode.
+A few themes are provided, each with light and dark mode. They need refinement. This is work in progress. ;-)
 
 ### Default
 

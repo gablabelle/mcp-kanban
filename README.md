@@ -6,7 +6,7 @@ A local-first Kanban board for AI agents, powered by the Model Context Protocol 
 [![license](https://img.shields.io/npm/l/mcp-kanban)](./LICENSE)
 ![node](https://img.shields.io/badge/node-%3E%3D18-brightgreen)
 
-<video src="mcp-kanban.mov" autoplay loop muted playsinline></video>
+![mcp-kanban demo](mcp-kanban.gif)
 
 ## What is mcp-kanban?
 

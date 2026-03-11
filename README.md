@@ -6,7 +6,7 @@ A local-first Kanban board for AI agents, powered by the Model Context Protocol 
 [![license](https://img.shields.io/npm/l/mcp-kanban)](./LICENSE)
 ![node](https://img.shields.io/badge/node-%3E%3D18-brightgreen)
 
-![mcp-kanban demo](mcp-kanban.gif)
+![mcp-kanban demo](assets/demo.gif)
 
 ## What is mcp-kanban?
 
@@ -387,6 +387,34 @@ Multiple agents can work in parallel on different branches or worktrees, each wi
 ## Tech Stack
 
 TypeScript, Hono, React, Vite, Tailwind CSS, dnd-kit, Drizzle ORM, better-sqlite3, MCP SDK
+
+## Themes
+
+Four built-in themes, each with light and dark mode.
+
+### Default
+
+| Light | Dark |
+|-------|------|
+| ![Default Light](assets/default-light.png) | ![Default Dark](assets/default-dark.png) |
+
+### Glass
+
+| Light | Dark |
+|-------|------|
+| ![Glass Light](assets/glass-light.png) | ![Glass Dark](assets/glass-dark.png) |
+
+### Brutalist
+
+| Light | Dark |
+|-------|------|
+| ![Brutalist Light](assets/brutalist-light.png) | ![Brutalist Dark](assets/brutalist-dark.png) |
+
+### Softnight
+
+| Light | Dark |
+|-------|------|
+| ![Softnight Light](assets/softnight-light.png) | ![Softnight Dark](assets/softnight-dark.png) |
 
 ## License
 

@@ -11,11 +11,13 @@
     "url": "https://github.com/gablabelle/mcp-kanban/issues"
   },
   "type": "module",
+  "main": "plugin/.opencode/plugins/mcp-kanban.js",
   "bin": {
     "mcp-kanban": "./dist/cli/index.js"
   },
   "files": [
     "dist/",
+    "plugin/",
     "README.md",
     "LICENSE"
   ],
@@ -26,6 +28,7 @@
     "build:server": "tsc -p tsconfig.server.json",
     "build:ui": "vite build",
     "start": "node dist/cli/index.js",
+    "test": "node --test test/*.test.mjs",
     "lint": "eslint src/",
     "prepublishOnly": "npm run build"
   },

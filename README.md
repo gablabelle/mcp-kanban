@@ -79,6 +79,34 @@ bash /path/to/mcp-kanban/scripts/claude-install-plugin.sh
 
 This copies skills to `.claude/skills/` and adds the Stop hook to `.claude/settings.json`.
 
+### OpenCode
+
+Add both the plugin and MCP server to your global OpenCode config at
+`~/.config/opencode/opencode.jsonc`:
+
+```jsonc
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["mcp-kanban@latest"],
+  "mcp": {
+    "kanban": {
+      "type": "local",
+      "command": ["npx", "-y", "mcp-kanban@latest", "mcp-server"]
+    }
+  }
+}
+```
+
+The plugin registers the bundled `kanban-plan`, `kanban-start`,
+`kanban-work`, and `kanban-stop` skills globally through OpenCode's
+`skills.paths` configuration. The MCP server provides the board tools those
+skills use. Keeping both roles in the same npm package means skill updates are
+installed with mcp-kanban instead of requiring copied files under
+`~/.agents/skills/`.
+
+Restart OpenCode after changing the config. Open `/skills` to find and run the
+Kanban skills.
+
 ### Cursor
 
 **1. Connect the MCP server:**
@@ -167,7 +195,7 @@ For any agent that supports MCP, configure it to run mcp-kanban in stdio mode:
 
 ## Skills
 
-Skills teach your agent how to use the board effectively. They work with Claude Code, Cursor, and Codex.
+Skills teach your agent how to use the board effectively. They work with Claude Code, OpenCode, Cursor, and Codex.
 
 ### `/kanban-plan`
 
